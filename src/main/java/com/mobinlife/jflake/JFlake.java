@@ -74,11 +74,11 @@ public class JFlake {
 			for(int i = SEQUENCE_BITS-1; i >= 0 ; i--){
 				bitSet.set(currentIndex--, (((sequenceNumber >> i)&1)==1));
 			}
-    		
+			
 			long value = 0L;
-		    for (int i = 0; i < ID_SIZE; ++i) {
-		      value += bitSet.get(i) ? (1L << i) : 0;
-		    }
+			for (int i = 0; i < ID_SIZE; ++i) {
+				value += bitSet.get(i) ? (1L << i) : 0;
+			}
 
 			return value;
     	}
