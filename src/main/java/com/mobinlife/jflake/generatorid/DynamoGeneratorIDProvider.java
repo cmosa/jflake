@@ -212,20 +212,20 @@ public class DynamoGeneratorIDProvider implements GeneratorIDProvider {
 		DescribeTableRequest request = new DescribeTableRequest();
 		request.setTableName(dynamoTable);
 		DescribeTableResult result;
-        try {
-            result = dynamoClient.describeTable(request);
-        } catch (ResourceNotFoundException e) {
-            return false;
-        } catch (AmazonClientException e) {
-        	
-        	throw new RuntimeException("Dynamo error when checking for table existence");
-        }
+		try {
+			result = dynamoClient.describeTable(request);
+		} catch (ResourceNotFoundException e) {
+			return false;
+		} catch (AmazonClientException e) {
 
-        String tableStatus = result.getTable().getTableStatus();
+			throw new RuntimeException("Dynamo error when checking for table existence");
+		}
 
-        return TableStatus.ACTIVE.name().equals(tableStatus);
+		String tableStatus = result.getTable().getTableStatus();
+
+		return TableStatus.ACTIVE.name().equals(tableStatus);
 	}
-	
+
 	private SortedMap<Integer, Long> getSortedLeasesFromDynamo(){
 		
 		ScanRequest scanRequest = new ScanRequest()

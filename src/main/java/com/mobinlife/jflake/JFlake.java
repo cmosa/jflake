@@ -19,51 +19,51 @@ public class JFlake {
 	private final static int SEQUENCE_BITS = 13;
 
 	private final ThreadLocal<BitSet> threadLocalBitSet = new ThreadLocal<BitSet>() {
-        @Override
-        public BitSet initialValue() {
-            return new BitSet(ID_SIZE);
-        }
-    };
-    
-    private final Object threadLock = new Object();
-    private volatile int sequenceNumber;
-    private volatile long timestamp;
-    private final int generatorId;
-   
-    /**
-     * 
-     * @param generatorId Generator identifier - 24bits
-     */
-    private JFlake(int generatorId){
-    	this.generatorId = generatorId;
-    }
-    
-    public static JFlake getUniqueIDGenerator(int generatorId) throws Exception{
-    	if(generatorId > MAX_GENERATORID_VALUE) {
-    		throw new Exception("Generator ID is 9 bits and cannot be more than " + MAX_GENERATORID_VALUE);
-    	}
-    	return new JFlake(generatorId);
-    }
-    
-    public long getId() throws Exception{
-    	if(sequenceNumber == MAX_SEQUENCE_VALUE){
-    		throw new Exception("No id available");
-    	}
+		@Override
+		public BitSet initialValue() {
+			return new BitSet(ID_SIZE);
+		}
+	};
 
-    	long now;
+	private final Object threadLock = new Object();
+	private volatile int sequenceNumber;
+	private volatile long timestamp;
+	private final int generatorId;
 
-    	synchronized(threadLock) {
-    		// Translation with a new origin gives us more room in the future
-    		now = System.currentTimeMillis()-EPOCH_TRANSLATION;
-    		if(now != timestamp) {
-    			timestamp = now;
-    			sequenceNumber = 0;
-    		} else {
-    			sequenceNumber++;
-    		}
-			
+	/**
+	 * 
+	 * @param generatorId Generator identifier - 24bits
+	 */
+	private JFlake(int generatorId){
+		this.generatorId = generatorId;
+	}
+
+	public static JFlake getUniqueIDGenerator(int generatorId) throws Exception{
+		if(generatorId > MAX_GENERATORID_VALUE) {
+			throw new Exception("Generator ID is 9 bits and cannot be more than " + MAX_GENERATORID_VALUE);
+		}
+		return new JFlake(generatorId);
+	}
+
+	public long getId() throws Exception{
+		if(sequenceNumber == MAX_SEQUENCE_VALUE){
+			throw new Exception("No id available");
+		}
+
+		long now;
+
+		synchronized(threadLock) {
+			// Translation with a new origin gives us more room in the future
+			now = System.currentTimeMillis()-EPOCH_TRANSLATION;
+			if(now != timestamp) {
+				timestamp = now;
+				sequenceNumber = 0;
+			} else {
+				sequenceNumber++;
+			}
+
 			BitSet bitSet = threadLocalBitSet.get();
-    		int currentIndex =  ID_SIZE-2;
+			int currentIndex =  ID_SIZE-2;
 
 			for(int i = TIME_BITS-1; i >= 0 ; i--){
 				bitSet.set(currentIndex--, (((now >> i)&1)==1));
@@ -74,14 +74,14 @@ public class JFlake {
 			for(int i = SEQUENCE_BITS-1; i >= 0 ; i--){
 				bitSet.set(currentIndex--, (((sequenceNumber >> i)&1)==1));
 			}
-			
+
 			long value = 0L;
 			for (int i = 0; i < ID_SIZE; ++i) {
 				value += bitSet.get(i) ? (1L << i) : 0;
 			}
 
 			return value;
-    	}
-    }
+		}
+	}
 
 }
