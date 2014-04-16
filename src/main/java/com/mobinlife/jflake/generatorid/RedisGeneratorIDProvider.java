@@ -1,4 +1,4 @@
-package com.mobinlife.jflake;
+package com.mobinlife.jflake.generatorid;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import com.mobinlife.jflake.configuration.RedisGeneratorIDConfiguration;
+import com.mobinlife.jflake.generatorid.configuration.RedisGeneratorIDConfiguration;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;

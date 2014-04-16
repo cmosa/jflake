@@ -3,8 +3,8 @@ package com.mobinlife.jflake;
 import java.util.BitSet;
 
 /**
- * Mob in Life per-App Unique ID generator
- * 64 bits id  
+ * JFlake is a generator of unique 64 bits IDs. 
+ * It needs to be initialized with a 9 bits generator ID (0 <= generatorId <= 511) 
  * @author Christophe
  *
  */

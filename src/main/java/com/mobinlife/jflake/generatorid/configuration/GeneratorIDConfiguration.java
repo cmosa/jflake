@@ -1,4 +1,4 @@
-package com.mobinlife.jflake.configuration;
+package com.mobinlife.jflake.generatorid.configuration;
 
 /**
  * Generic configuration interface

@@ -1,4 +1,4 @@
-package com.mobinlife.jflake;
+package com.mobinlife.jflake.generatorid;
 
 public interface GeneratorIDProvider {
 

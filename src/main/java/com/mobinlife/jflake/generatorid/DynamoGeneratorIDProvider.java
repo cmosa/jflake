@@ -1,4 +1,4 @@
-package com.mobinlife.jflake;
+package com.mobinlife.jflake.generatorid;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +20,7 @@ import com.amazonaws.services.dynamodbv2.model.ResourceNotFoundException;
 import com.amazonaws.services.dynamodbv2.model.ScanRequest;
 import com.amazonaws.services.dynamodbv2.model.ScanResult;
 import com.amazonaws.services.dynamodbv2.model.TableStatus;
-import com.mobinlife.jflake.configuration.DynamoGeneratorIDConfiguration;
+import com.mobinlife.jflake.generatorid.configuration.DynamoGeneratorIDConfiguration;
 
 /**
  * Generator ID provider based on a dynamo table
