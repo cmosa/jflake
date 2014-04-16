@@ -57,7 +57,7 @@ public class JFlake {
     		now = System.currentTimeMillis()-EPOCH_TRANSLATION;
     		if(now != timestamp) {
     			timestamp = now;
-    			sequenceNumber = 1;
+    			sequenceNumber = 0;
     		} else {
     			sequenceNumber++;
     		}
