@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.mobinlife</groupId>
     <artifactId>jflake</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
     <name>JFlake</name>
     <properties>
         <amazonaws.version>1.7.5</amazonaws.version>
@@ -14,7 +14,7 @@
     
     <build>
         <extensions>
-            <extension>
+            <extension> 
                 <groupId>org.springframework.build</groupId>
                 <artifactId>aws-maven</artifactId>
                 <version>5.0.0.RELEASE</version>  
