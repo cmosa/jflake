@@ -38,7 +38,7 @@ public class JFlake {
 		this.generatorId = generatorId;
 	}
 
-	public static JFlake getUniqueIDGenerator(int generatorId) throws Exception{
+	public static JFlake createJFlakeInstance(int generatorId) throws Exception{
 		if(generatorId > MAX_GENERATORID_VALUE) {
 			throw new Exception("Generator ID is 9 bits and cannot be more than " + MAX_GENERATORID_VALUE);
 		}

@@ -7,6 +7,12 @@ It is composed of two major components: The JFlake class which generates IDs and
 
 Currently under development, version 0.1 - Use at your own risks
 
+Usage
+-----
+
+* Source: recommended for fine tuning of id components (e.g. to change the bits allocated for each of the 3 components)
+* Maven: A public repository is available (only snapshots for now), simply add 
+
 Origin
 ------
 
