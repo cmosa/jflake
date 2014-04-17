@@ -43,7 +43,13 @@ A GeneratorIDProvider class has to be initilazed with its configuration and must
 When leasing an id, it will first look for expired leases, and if no expired lease was found, it will lease a new id. 
 
 ### DynamoDB implementation
-To use the DynamoDB implementation, you must dedicate a DynamoDB table to the lease system. The table has only a Hash Key (no Range Key) with a default Hash Key name "id", which can be overrided via the configuration file. 
+To use the DynamoDB implementation, you must dedicate a DynamoDB table to the lease system. The table has only a Hash Key (no Range Key) with a default Hash Key name "id", which can be overridden via the configuration file. The lease expiration timestamp is stored in attribute name "exp" which also can be overridden via the config file. 
+
+| id | exp |
+| ------ | ------ |
+| [Generator ID leased] | [lease expiration timestamp] |
+| 1 | 1397737412487 | 
+| 3 | 1397737449345 |
 
 You must set the provisioned capactiy according to your usage pattern:
 * leaseRenewalFrequency: the higher the frequency, the higher the write throughput will be
@@ -54,4 +60,17 @@ You must set the provisioned capactiy according to your usage pattern:
     `capacity = (GeneratorCount / leaseRenewalFrequencyInSeconds) + a safety capacity overhead`
 * A read/write capacity of 10/2 will be enough for the majority of small to medium scale use cases — which gives a monthly cost of around $2 (us-east April 2014 pricing)
 * Warning: if all leasers are created at the same time, they will renew leases at the same time and create bursts of writes
+
+
+
+
+
+
+
+
+
+
+
+
+
 
