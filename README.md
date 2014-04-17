@@ -49,9 +49,7 @@ You must set the provisioned capactiy according to your usage pattern:
 * leaseRenewalFrequency: the higher the frequency, the higher the write throughput will be
 * maxLeaseRetries: can increase the burst capacity needed in some exceptional cases
 * More generators will need both more read and write capacity 
-* Write capacity needed can be estimated with this formula: 
-
-    capacity = (GeneratorCount / leaseRenewalFrequencyInSeconds) + a safety capacity overhead
+* Write capacity needed can be estimated with this formula: `capacity = (GeneratorCount / leaseRenewalFrequencyInSeconds) + a safety capacity overhead`
 * A read/write capacity of 10/2 will be enough for the majority of small to medium scale use cases — which gives a monthly cost of around $2 (us-east April 2014 pricing)
 * Warning: if all leasers are created at the same time, they will renew leases at the same time and create bursts of writes
 
