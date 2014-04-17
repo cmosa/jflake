@@ -81,12 +81,12 @@ public class DynamoGeneratorIDProvider implements GeneratorIDProvider {
 			long now = System.currentTimeMillis();
 			long bookedLeaseOriginalExpirationDate = -1;
 			
-			SortedMap<Integer, Long> leases = getSortedLeasesFromDynamo();
+			SortedMap<Integer, Long> leases = getSortedLeasesFromDynamo(); // Map of LeaseId => LeaseExpirationTimestamp
 			
 			int leaseToBook=-1;
 			if(leases.size() == 0) {
 				// first lease
-				leaseToBook = 1;
+				leaseToBook = 0;
 			} else {
 				for(Integer leaseId : leases.keySet()){
 					if(now > leases.get(leaseId)){
@@ -136,7 +136,8 @@ public class DynamoGeneratorIDProvider implements GeneratorIDProvider {
 	
 	private void renewLease(){
 		Map<String, ExpectedAttributeValue> expected = new HashMap<String, ExpectedAttributeValue>();
-		expected.put(dynamoHashKeyName, new ExpectedAttributeValue().withExists(true));
+		expected.put(dynamoHashKeyName, new ExpectedAttributeValue().withExists(true)
+				.withValue( new AttributeValue().withN(String.valueOf(generatorID))));
 		
 		Map<String, AttributeValue> item = new HashMap<String, AttributeValue>();
 		item.put(dynamoHashKeyName, new AttributeValue().withN(String.valueOf(generatorID)));

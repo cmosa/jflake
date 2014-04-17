@@ -78,7 +78,7 @@ public class RedisGeneratorIDProvider implements GeneratorIDProvider {
 				int leaseToBook=-1;
 				if(leases.size() == 0) {
 					// first lease
-					leaseToBook = 1;
+					leaseToBook = 0;
 				} else {
 					for(Integer leaseId : leases.keySet()){
 						if(now > leases.get(leaseId)){
