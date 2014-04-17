@@ -62,6 +62,15 @@ You must set the provisioned capactiy according to your usage pattern:
 * Warning: if all leasers are created at the same time, they will renew leases at the same time and create bursts of writes
 
 
+Atomicity is achieved using DynamoDB's CAS implementation with conditional writes (e.g. "ExpectedAttributeValue"-requests). 
+
+
+### Redis implementation
+
+(tbc...)
+
+
+
 
 
 
